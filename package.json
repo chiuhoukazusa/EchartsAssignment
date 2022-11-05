@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "echarts": "^5.4.0",
-    "echarts-gl": "^2.0.9"
+    "echarts-gl": "^2.0.9",
+    "jquery": "^3.6.1"
   }
 }
