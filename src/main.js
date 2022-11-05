@@ -7,7 +7,8 @@ let audioSource;
 let analyzer;
 let _fftSize = 512;
 
-var dataArray = new Uint8Array
+var dataArray = new Uint8Array;
+var percent = 0;
 
 //map
 var dom = document.getElementById('main');
@@ -140,7 +141,7 @@ $.getJSON(
                 }
             },
             groundPlane: {
-                show: false,
+                show: true,
                 color: '#333'
             },
             light: {
@@ -154,7 +155,7 @@ $.getJSON(
                 intensity: 0
                 },
                 ambientCubemap: {
-                texture: 'asset/texture/canyon.hdr',
+                texture: 'asset/texture/daytime.hdr',
                 exposure: 2,
                 diffuseIntensity: 1,
                 specularIntensity: 1
@@ -165,7 +166,8 @@ $.getJSON(
                 maxBeta: 360
             },
             itemStyle: {
-                areaColor: '#666'
+                areaColor: '#666',
+                borderWidth: 0.8
             },
             label: {
                 color: 'white'
@@ -187,6 +189,10 @@ $.getJSON(
 }
 );
 
+function mapLinear2pow(num){
+    return Math.pow(num, 2) / 65025 * 80 + 2;
+}
+
 function refreshData(){
     console.log("refreshData");
     $.getJSON(
@@ -198,79 +204,79 @@ function refreshData(){
             return {
               name: feature.properties.name,
               value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-              height: (dataArray[0]/255) * 80
+              height: mapLinear2pow(dataArray[0])
             };
             }else if(feature.properties.name === '余杭区') {
               return {
                 name: feature.properties.name,
                 value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                height: (dataArray[1]/255) * 80
+                height: mapLinear2pow(dataArray[1])
               };
             }else if(feature.properties.name === '滨江区') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[2]/255) * 80
+                    height: mapLinear2pow(dataArray[2])
                 };
             }else if(feature.properties.name === '萧山区') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[3]/255) * 80
+                    height: mapLinear2pow(dataArray[3])
                 };
             }else if(feature.properties.name === '拱墅区') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[4]/255) * 80
+                    height: mapLinear2pow(dataArray[4])
                 };
             }else if(feature.properties.name === '上城区') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[5]/255) * 80
+                    height: mapLinear2pow(dataArray[5])
                 };
             }else if(feature.properties.name === '钱塘区') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[6]/255) * 80
+                    height: mapLinear2pow(dataArray[6])
                 };
             }else if(feature.properties.name === '富阳区') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[7]/255) * 80
+                    height: mapLinear2pow(dataArray[7])
                 };
             }else if(feature.properties.name === '临安区') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[8]/255) * 80
+                    height: mapLinear2pow(dataArray[8])
                 };
             }else if(feature.properties.name === '临平区') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[9]/255) * 80
+                    height: mapLinear2pow(dataArray[9])
                 };
             }else if(feature.properties.name === '桐庐县') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[10]/255) * 80
+                    height: mapLinear2pow(dataArray[10])
                 };
             }else if(feature.properties.name === '建德市') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[11]/255) * 80
+                    height: mapLinear2pow(dataArray[11])
                 };
             }else if(feature.properties.name === '淳安县') {
                 return {
                     name: feature.properties.name,
                     value: Math.max(Math.sqrt(feature.properties.height), 0.1),
-                    height: (dataArray[12]/255) * 80
+                    height: mapLinear2pow(dataArray[12])
                 };
             }else{
                 return {
@@ -311,7 +317,7 @@ function refreshData(){
                     }
                 },
                 groundPlane: {
-                    show: false,
+                    show: true,
                     color: '#333'
                 },
                 light: {
@@ -319,13 +325,14 @@ function refreshData(){
                     intensity: 6,
                     shadow: true,
                     shadowQuality: 'high',
-                    alpha: 30
+                    alpha: 30,
+                    beta: percent * 360
                     },
                     ambient: {
                     intensity: 0
                     },
                     ambientCubemap: {
-                    texture: 'asset/texture/canyon.hdr',
+                    texture: 'asset/texture/daytime.hdr',
                     exposure: 2,
                     diffuseIntensity: 1,
                     specularIntensity: 1
@@ -336,7 +343,8 @@ function refreshData(){
                     maxBeta: 360
                 },
                 itemStyle: {
-                    areaColor: '#666'
+                    areaColor: '#666',
+                    borderWidth: 0.8 * dataArray[0] / 255
                 },
                 label: {
                     color: 'white'
@@ -381,7 +389,7 @@ file.addEventListener('change', function(){
     let x;
 
     function animate(){
-        let percent = audio1.currentTime/audio1.duration;
+        percent = audio1.currentTime/audio1.duration;
         x = 0;
         //将当前频率数据复制到传入的 Uint8Array（无符号字节数组）中,
         //如果数组的长度小于 AnalyserNode.frequencyBinCount, 
