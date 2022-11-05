@@ -20,7 +20,7 @@ var app = {};
 var option;
 
 $.getJSON(
-    'asset/data/HangZhou.json',
+    'https://geo.datav.aliyun.com/areas_v3/bound/330100_full.json',
     function (buildingsGeoJSON) {
       echarts.registerMap('buildings', buildingsGeoJSON);
       var regions = buildingsGeoJSON.features.map(function (feature) {
@@ -120,7 +120,7 @@ $.getJSON(
             realisticMaterial: {
                 roughness: 0.6,
                 textureTiling: 20,
-                detailTexture: 'asset/texture/woods.jpg'
+                detailTexture: 'https://cdn.jsdelivr.net/gh/chiuhoukazusa/EchartsAssignment@master/asset/texture/woods.jpg'
             },
             postEffect: {
                 enable: true,
@@ -155,7 +155,7 @@ $.getJSON(
                 intensity: 0
                 },
                 ambientCubemap: {
-                texture: 'asset/texture/daytime.hdr',
+                texture: 'https://cdn.jsdelivr.net/gh/chiuhoukazusa/EchartsAssignment@master/asset/texture/daytime.hdr',
                 exposure: 2,
                 diffuseIntensity: 1,
                 specularIntensity: 1
@@ -196,7 +196,7 @@ function mapLinear2pow(num){
 function refreshData(){
     console.log("refreshData");
     $.getJSON(
-        'asset/data/HangZhou.json',
+        'https://geo.datav.aliyun.com/areas_v3/bound/330100_full.json',
         function (buildingsGeoJSON) {
           echarts.registerMap('buildings', buildingsGeoJSON);
           var regions = buildingsGeoJSON.features.map(function (feature) {
@@ -296,7 +296,7 @@ function refreshData(){
                 realisticMaterial: {
                     roughness: 0.6,
                     textureTiling: 20,
-                    detailTexture: 'asset/texture/woods.jpg'
+                    detailTexture: 'https://cdn.jsdelivr.net/gh/chiuhoukazusa/EchartsAssignment@master/asset/texture/woods.jpg'
                 },
                 postEffect: {
                     enable: true,
@@ -332,7 +332,7 @@ function refreshData(){
                     intensity: 0
                     },
                     ambientCubemap: {
-                    texture: 'asset/texture/daytime.hdr',
+                    texture: 'https://cdn.jsdelivr.net/gh/chiuhoukazusa/EchartsAssignment@master/asset/texture/daytime.hdr',
                     exposure: 2,
                     diffuseIntensity: 1,
                     specularIntensity: 1
