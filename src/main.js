@@ -1,7 +1,6 @@
 //audio
 //const button1 = document.getElementById('button1');
 
-const container = document.getElementById('container');
 const file = document.getElementById('fileupload');
 let audioSource;
 let analyzer;
