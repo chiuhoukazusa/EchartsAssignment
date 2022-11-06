@@ -20,7 +20,7 @@ var app = {};
 var option;
 
 $.getJSON(
-    'https://geo.datav.aliyun.com/areas_v3/bound/330100_full.json',
+    'asset/data/HangZhou.json',
     function (buildingsGeoJSON) {
       echarts.registerMap('buildings', buildingsGeoJSON);
       var regions = buildingsGeoJSON.features.map(function (feature) {
@@ -117,6 +117,7 @@ $.getJSON(
             type: 'map3D',
             map: 'buildings',
             shading: 'realistic',
+            color: '#333',
             realisticMaterial: {
                 roughness: 0.6,
                 textureTiling: 20,
@@ -142,7 +143,13 @@ $.getJSON(
             },
             groundPlane: {
                 show: true,
-                color: '#333'
+                color: '#333',                    
+                shading: 'realistic',
+                realisticMaterial: {
+                    roughness: 0.6,
+                    textureTiling: 20,
+                    detailTexture: 'https://cdn.jsdelivr.net/gh/chiuhoukazusa/EchartsAssignment@master/asset/texture/GridTex.jpeg'
+                },
             },
             light: {
                 main: {
@@ -196,7 +203,7 @@ function mapLinear2pow(num){
 function refreshData(){
     console.log("refreshData");
     $.getJSON(
-        'https://geo.datav.aliyun.com/areas_v3/bound/330100_full.json',
+        'asset/data/HangZhou.json',
         function (buildingsGeoJSON) {
           echarts.registerMap('buildings', buildingsGeoJSON);
           var regions = buildingsGeoJSON.features.map(function (feature) {
@@ -293,6 +300,7 @@ function refreshData(){
                 type: 'map3D',
                 map: 'buildings',
                 shading: 'realistic',
+                color: '#333',
                 realisticMaterial: {
                     roughness: 0.6,
                     textureTiling: 20,
@@ -318,7 +326,13 @@ function refreshData(){
                 },
                 groundPlane: {
                     show: true,
-                    color: '#333'
+                    color: '#333',
+                    shading: 'realistic',
+                    realisticMaterial: {
+                        roughness: 0.6,
+                        textureTiling: 20,
+                        detailTexture: 'https://cdn.jsdelivr.net/gh/chiuhoukazusa/EchartsAssignment@master/asset/texture/GridTex.jpeg'
+                    },
                 },
                 light: {
                     main: {
